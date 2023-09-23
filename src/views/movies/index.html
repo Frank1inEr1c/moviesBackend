@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Películas</title>
+</head>
+<body>
+    <h1>Listado de Películas</h1>
+    
+    <ul id="movie-list">
+        <!-- Aquí se mostrarán las películas dinámicamente -->
+    </ul>
+
+    <script>
+        // JavaScript para cargar las películas desde el servidor
+        fetch('/movies/buscar?busqueda=thor') // Reemplaza 'TU_BUSQUEDA' con la búsqueda deseada
+            .then(response => response.json())
+            .then(data => {
+                const movieList = document.getElementById('movie-list');
+                data.movies.forEach(movie => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${movie.Title} (${movie.Year})`;
+                    movieList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error al cargar las películas:', error));
+    </script>
+</body>
+</html>
